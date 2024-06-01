@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="All Salesforce Objects">
+
+        <lightning-combobox
+            name="progress"
+            label="Entities"
+            placeholder="Select Entity Object"
+            value={value}
+            options={sobjectList}
+            onchange={handleChange} ></lightning-combobox>
+
+    <p>Selected value is: {value}</p>
+    </lightning-card>
+
+<lightning-button variant="base" label="Get Records" title="Get Records" onclick={getRecordsForEntity} class="slds-m-left_x-small"></lightning-button>
+
+<template lwc:if = {recordsList}>
+  <div> 
+    <lightning-datatable
+                key-field="id"
+                data={recordsList}
+                columns={columns}>
+        </lightning-datatable>
+  </div>
+</template>
+
+<!---fields structure-->
+
+ <!--template lwc:if={fieldList}>
+      <lightning-combobox
+            name="Fields"
+            label="Fields"
+            placeholder="Select Fields"
+            value={fieldValues}
+            options={fieldListMap}
+            onchange={handleChangeFields} ></lightning-combobox>
+    </template>
+  </lightning-card-->
+
+  <!--- fields dual--->
+<template lwc:if={fieldList}>
+    <lightning-dual-listbox name="Fields"
+                            label="Select Fields"
+                            source-label="Available"
+                            selected-label="Selected"
+                            field-level-help="Select your preferred languages"
+                            options={fieldListMap}
+                            onchange={handleChangeDualCombo}></lightning-dual-listbox>
+    <div class="slds-box" >
+        <p>Selected values are: {selected}</p>
+    </div>
+
+
+    <lightning-button variant="base" label="Get Records For Selected Fields" title="Get Records For Selected Fields" onclick={getRecordsOnSelectedFields} class="slds-m-left_x-small"></lightning-button>
+</template>
+
+
+</template>
